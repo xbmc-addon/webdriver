@@ -33,6 +33,8 @@ def test():
     local('rm -rf ./build-sdist')
     run('cd /tmp/webdriver;tar zxf ./webdriver.tar.gz')
     sudo('cd /tmp/webdriver/webdriver-' + version + '/;python setup.py install;rm -rf /tmp/webdriver')
+    run("""rm -rf /tmp/testrepo;mkdir -p /tmp/testrepo/repo/test_driver;echo '# -*- coding: utf-8 -*-\n__all__=["test_driver"]\nimport test_driver' > /tmp/testrepo/repo/__init__.py""")
+    put('./test.py', '/tmp/testrepo/repo/test_driver/__init__.py')
 
 
 
