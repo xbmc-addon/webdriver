@@ -3,6 +3,7 @@
 __author__ = 'HAL9000'
 __all__ = ['Cache']
 
+import pickle
 import sqlite3
 import threading
 
@@ -32,6 +33,7 @@ class Cache:
         except:
             pass
         else:
+            # TODO: тут что-то...
             print res
             for r in res:
                 print r
@@ -43,4 +45,16 @@ class Cache:
             else:
                 notfound.append(key)
         return found, notfound
+
+    def set(self, data, prefix):
+        query = [(''.join([prefix, k]), v[0], sqlite3.Binary(pickle.dumps(v[1], -1))) for k, v in data.items()]
+        self.lock.acquire()
+        try:
+            self.db.executemany('replace into cache(token, timeout, data) values(?,?,?)', query)
+        except:
+            res = False
+        else:
+            res = True
+        self.lock.release()
+        return res
 

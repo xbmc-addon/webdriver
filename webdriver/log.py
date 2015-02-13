@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'HAL9000'
-__all__ = ['log', 'init_log']
+__all__ = ['make_log', 'set_log', 'get_log']
 
 log = None
 

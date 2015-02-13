@@ -289,7 +289,7 @@ def register_treebuilders_from(module):
     """Copy TreeBuilders from the given module into this module."""
     # I'm fairly sure this is not the best way to do this.
     #this_module = sys.modules['common.bs4.builder']
-    this_module = sys.modules['webdrivers.common.bs4.builder']
+    this_module = sys.modules['webdriver.libs.bs4.builder']
     for name in module.__all__:
         obj = getattr(module, name)
 
